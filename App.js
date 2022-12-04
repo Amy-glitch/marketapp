@@ -17,10 +17,11 @@ function Tabnav()
 {
   return ( 
     <Tab.Navigator> 
-      <Tab.Screen name="All" component={AllScreen} />
-      <Tab.Screen name="Clothing" component={ClothScreen} /> 
+      <Tab.Screen name="Home" component={AllScreen} />
+      <Tab.Screen name="Fashion" component={ClothScreen} /> 
       <Tab.Screen name="Academics" component={AcademicsScreen} /> 
       <Tab.Screen name="Other" component={OtherScreen} /> 
+      <Tab.Screen name="Profile" component={LoginScreen} /> 
       </Tab.Navigator> )
  
 }
@@ -28,20 +29,7 @@ function Tabnav()
 
 export default function App() {
  return <NavigationContainer>
-  <Stack.Navigator screenOptions={({navigation})=>({
-    headerRight: ()=>{
-      console.log(navigation.getState())
-      let index=navigation.getState().index;
-      if (navigation.getState().routes[index].name=='MatieMarket')
-      return <Button title="Profile" onPress={()=> navigation.navigate('Login')}/>
-      else return <></>
-    }
-     
-      
-  })}>
-    <Stack.Screen name = 'MatieMarket' component={Tabnav}/>
-    <Stack.Screen name ='Login' component={LoginScreen}/>
-  </Stack.Navigator>
+  <Tabnav/>
  </NavigationContainer>
 }
 
