@@ -1,6 +1,5 @@
-
-import React, { useContext } from 'react'
-import { StyleSheet, Text, View, Button, Image } from 'react-native';
+import React from 'react'
+import { StyleSheet, Text, View } from 'react-native';
 
 const PillsComp = (props) => {
     const Pills = () => {
@@ -14,6 +13,7 @@ const PillsComp = (props) => {
             </View>
         </View></>
 }
+
 const styles = StyleSheet.create({
     tagbox: {
         alignItems: 'center',

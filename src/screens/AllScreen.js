@@ -8,15 +8,9 @@ import { ItemContext } from '../context/ItemContext';
 const AllScreen = ({ navigation }) => {
     const ItemCtx = useContext(ItemContext)
     items = ItemCtx.items;
-
-
     useEffect(() => {
-        // Update the document title using the browser API
         ItemCtx.getData()
     });
-
-
-
     return <>
         <SearchComp />
         <FlatList data={items} renderItem={({ item }) => {
@@ -25,6 +19,5 @@ const AllScreen = ({ navigation }) => {
     </>
 }
 const styles = StyleSheet.create({
-
 })
 export default AllScreen;

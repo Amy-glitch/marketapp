@@ -9,7 +9,6 @@ import SearchComp from '../components/SearchComp';
 const AcademicsScreen = ({ navigation }) => {
     const ItemCtx = useContext(ItemContext)
     items = ItemCtx.items;
-
     return <>
         <SearchComp />
         <PillsComp pills={['Textbooks', 'Tutors', 'Notes']} />
@@ -18,8 +17,6 @@ const AcademicsScreen = ({ navigation }) => {
         }} ></FlatList>
     </>
 }
-
 const styles = StyleSheet.create({
 })
-
 export default AcademicsScreen;

@@ -1,11 +1,9 @@
 
-import React, { useContext } from 'react'
+import React from 'react'
 import { StyleSheet, Text, View, Button, Image, TouchableOpacity } from 'react-native';
 
 
 const ItemComp = (props) => {
-
-
     return <>
         <TouchableOpacity onPress={() => props.navigation.navigate("ItemNav", props.item)}>
             <View style={styles.block}>
@@ -19,7 +17,6 @@ const ItemComp = (props) => {
         </TouchableOpacity>
     </>
 }
-//
 
 const styles = StyleSheet.create({
     imgView: {
