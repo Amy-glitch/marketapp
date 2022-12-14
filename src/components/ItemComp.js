@@ -5,15 +5,16 @@ import { StyleSheet, Text, View, Button, Image, TouchableOpacity } from 'react-n
 
 const ItemComp = (props) => {
 
+
     return <>
         <TouchableOpacity onPress={() => props.navigation.navigate("ItemNav", props.item)}>
             <View style={styles.block}>
                 <Text style={styles.head}>{props.item.title}</Text>
                 <View style={styles.imgView}>
-                    <Image style={styles.img} source={{ uri: 'https://stickerly.pstatic.net/sticker_pack/kd7ZooCY2IKkjvCjsszw/T01DIS/7/6fac0144-9bd1-40f5-b968-885621484b39.png' }} />
+                    <Image style={styles.img} source={{ uri: props.item.img_url[0] }} />
                 </View>
                 <Text style={styles.price}>R {props.item.price}</Text>
-                <Text style={styles.desc}> {props.item.desc} </Text>
+                <Text style={styles.desc}> {props.item.description} </Text>
             </View>
         </TouchableOpacity>
     </>
