@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { StyleSheet, TextInput } from 'react-native';
-const SearchComp = () => {
+const SearchComp = (props) => {
     const [str, setStr] = useState("")
     return <>
-        <TextInput onChangeText={(s) => setStr(s)} value={str} style={styles.searchbar} />
+        <TextInput onSubmitEditing={() => props.func(str)} onChangeText={(s) => setStr(s)} value={str} style={styles.searchbar} />
     </>
 }
 const styles = StyleSheet.create({

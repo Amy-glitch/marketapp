@@ -7,9 +7,9 @@ import { ItemContext } from '../context/ItemContext';
 import SearchComp from '../components/SearchComp';
 const OtherScreen = ({ navigation }) => {
     const ItemCtx = useContext(ItemContext)
-    items = ItemCtx.items;
+    items = ItemCtx.itemsOther;
     return <>
-        <SearchComp />
+        <SearchComp func={(term) => ItemCtx.searchOther(term)} />
         <PillsComp pills={['Dorm', 'Tech', 'Furniture']} />
         <FlatList data={items} renderItem={({ item }) => <ItemComp item={item} navigation={navigation} />} ></FlatList>
     </>

@@ -8,9 +8,9 @@ import SearchComp from '../components/SearchComp';
 
 const AcademicsScreen = ({ navigation }) => {
     const ItemCtx = useContext(ItemContext)
-    items = ItemCtx.items;
+    items = ItemCtx.itemsAcademic;
     return <>
-        <SearchComp />
+        <SearchComp func={(term) => ItemCtx.searchAcademic(term)} />
         <PillsComp pills={['Textbooks', 'Tutors', 'Notes']} />
         <FlatList data={items} renderItem={({ item }) => {
             return <ItemComp item={item} navigation={navigation} />

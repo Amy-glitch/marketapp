@@ -8,9 +8,9 @@ import SearchComp from '../components/SearchComp';
 
 const ClothScreen = ({ navigation }) => {
     const ItemCtx = useContext(ItemContext)
-    items = ItemCtx.items;
+    items = ItemCtx.itemsFashion;
     return <>
-        <SearchComp />
+        <SearchComp func={(term) => ItemCtx.searchFashion(term)} />
         <PillsComp pills={['Top', 'Bottom', 'Shoes', 'Accesories']} />
         <FlatList data={items} renderItem={({ item }) => <ItemComp item={item} navigation={navigation} />} ></FlatList>
     </>

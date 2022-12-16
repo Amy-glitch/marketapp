@@ -8,11 +8,13 @@ import { ItemContext } from '../context/ItemContext';
 const AllScreen = ({ navigation }) => {
     const ItemCtx = useContext(ItemContext)
     items = ItemCtx.items;
-    useEffect(() => {
-        ItemCtx.getData()
-    });
+    // useEffect(() => {
+    //     ItemCtx.getData()
+    // });
+
+
     return <>
-        <SearchComp />
+        <SearchComp func={(term) => ItemCtx.searchItem(term)} />
         <FlatList data={items} renderItem={({ item }) => {
             return <ItemComp item={item} navigation={navigation} />
         }} ></FlatList>

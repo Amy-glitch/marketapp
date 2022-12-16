@@ -4,12 +4,46 @@ export const ItemContext = React.createContext(null);
 export default ({ children }) => {
 
     const [items, setItems] = useState([])
+    const [itemsFashion, setItemsFashion] = useState([])
+    const [itemsAcademic, setItemsAcademic] = useState([])
+    const [itemsOther, setItemsOther] = useState([])
 
-    async function getData() {
-        let { data, error, status } = await supabase
+
+
+
+    async function searchAcademic(term) {
+        const { data, error } = await supabase
+            .from('items').select()
+            .like('title', '%' + term + '%').eq('category', 'Academic')
+        setItemsAcademic(data)
+    }
+
+    async function searchFashion(term) {
+        const { data, error } = await supabase
+            .from('items').select()
+            .like('title', '%' + term + '%').eq('category', 'Fashion')
+        setItemsFashion(data)
+    }
+
+    async function searchOther(term) {
+        const { data, error } = await supabase
+            .from('items').select()
+            .like('title', '%' + term + '%').eq('category', 'Other')
+        setItemsOther(data)
+    }
+
+
+
+
+    async function searchItem(term) {
+
+        const { data, error } = await supabase
             .from('items')
-            .select(`*`)
+            .select()
+            .like('title', '%' + term + '%')
         setItems(data)
+        console.log(data)
+
     }
 
     async function addItem(props) {
@@ -38,5 +72,5 @@ export default ({ children }) => {
         return data.publicUrl
     }
 
-    return <ItemContext.Provider value={{ items, getData, addItem, uploadImg }}>{children}</ItemContext.Provider>
+    return <ItemContext.Provider value={{ items, itemsFashion, itemsAcademic, itemsOther, addItem, uploadImg, searchItem, searchAcademic, searchFashion, searchOther }}>{children}</ItemContext.Provider>
 }
