@@ -1,9 +1,11 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 const PillsComp = (props) => {
     const Pills = () => {
-        return props.pills.map((pill) => <View key={pill} style={styles.tag}><Text>{pill}</Text></View>
+        return props.pills.map((pill) => {
+            return <TouchableOpacity onPress={() => props.func(pill)} key={pill} ><View style={styles.tag}><Text>{pill}</Text></View></TouchableOpacity>
+        }
         )
     }
     return <>

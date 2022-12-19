@@ -8,28 +8,59 @@ export default ({ children }) => {
     const [itemsAcademic, setItemsAcademic] = useState([])
     const [itemsOther, setItemsOther] = useState([])
 
+    const [searchbar, setSearchbar] = useState(false)
 
 
 
-    async function searchAcademic(term) {
-        const { data, error } = await supabase
-            .from('items').select()
-            .like('title', '%' + term + '%').eq('category', 'Academic')
-        setItemsAcademic(data)
+    async function searchAcademic(term, sub) {
+        if (!sub) {
+            const { data, error } = await supabase
+                .from('items').select()
+                .like('title', '%' + term + '%').eq('category', 'Academic')
+            setItemsAcademic(data)
+        } else {
+            const { data, error } = await supabase
+                .from('items').select()
+                .like('title', '%' + term + '%').eq('category', 'Academic').eq('sub_category', sub)
+            setItemsAcademic(data)
+
+        }
+
     }
 
-    async function searchFashion(term) {
-        const { data, error } = await supabase
-            .from('items').select()
-            .like('title', '%' + term + '%').eq('category', 'Fashion')
-        setItemsFashion(data)
+    async function searchFashion(term, sub) {
+
+        if (!sub) {
+            const { data, error } = await supabase
+                .from('items').select()
+                .like('title', '%' + term + '%').eq('category', 'Fashion')
+            setItemsFashion(data)
+        } else {
+            const { data, error } = await supabase
+                .from('items').select()
+                .like('title', '%' + term + '%').eq('category', 'Fashion').eq('sub_category', sub)
+            setItemsFashion(data)
+
+        }
+
     }
 
-    async function searchOther(term) {
-        const { data, error } = await supabase
-            .from('items').select()
-            .like('title', '%' + term + '%').eq('category', 'Other')
-        setItemsOther(data)
+    async function searchOther(term, sub) {
+        if (!sub) {
+            const { data, error } = await supabase
+                .from('items').select()
+                .like('title', '%' + term + '%').eq('category', 'Other')
+            setItemsOther(data)
+        }
+
+        else {
+            const { data, error } = await supabase
+                .from('items').select()
+                .like('title', '%' + term + '%').eq('category', 'Other').eq('sub_category', sub)
+            setItemsOther(data)
+
+        }
+
     }
 
 
@@ -52,7 +83,9 @@ export default ({ children }) => {
             title: props.title,
             price: props.price,
             description: props.description,
-            img_url: props.imgurls
+            img_url: props.imgurls,
+            category: props.category,
+            sub_category: props.subCat
         }
         let { error } = await supabase.from('items').upsert(updates)
     }
@@ -72,5 +105,5 @@ export default ({ children }) => {
         return data.publicUrl
     }
 
-    return <ItemContext.Provider value={{ items, itemsFashion, itemsAcademic, itemsOther, addItem, uploadImg, searchItem, searchAcademic, searchFashion, searchOther }}>{children}</ItemContext.Provider>
+    return <ItemContext.Provider value={{ searchbar, setSearchbar, items, itemsFashion, itemsAcademic, itemsOther, addItem, uploadImg, searchItem, searchAcademic, searchFashion, searchOther }}>{children}</ItemContext.Provider>
 }

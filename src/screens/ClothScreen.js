@@ -1,17 +1,18 @@
 
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { StyleSheet, Text, View, Button, FlatList } from 'react-native';
 import ItemComp from '../components/ItemComp';
-import PillsComp from '../components/PillsComp';
 import { ItemContext } from '../context/ItemContext';
 import SearchComp from '../components/SearchComp';
 
 const ClothScreen = ({ navigation }) => {
     const ItemCtx = useContext(ItemContext)
     items = ItemCtx.itemsFashion;
+    useEffect(() => {
+        ItemCtx.searchFashion('')
+    }, []);
     return <>
-        <SearchComp func={(term) => ItemCtx.searchFashion(term)} />
-        <PillsComp pills={['Top', 'Bottom', 'Shoes', 'Accesories']} />
+        <SearchComp pills={['All', 'Top', 'Bottom', 'Accesories', 'Misc']} func={(term, sub) => ItemCtx.searchFashion(term, sub)} />
         <FlatList data={items} renderItem={({ item }) => <ItemComp item={item} navigation={navigation} />} ></FlatList>
     </>
 }
