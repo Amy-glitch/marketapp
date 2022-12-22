@@ -8,11 +8,13 @@ import AcademicsScreen from './src/screens/AcademicsScreen';
 import OtherScreen from './src/screens/OtherScreen';
 import AllScreen from './src/screens/AllScreen';
 import ItemContextProvider from './src/context/ItemContext'
+import AuthContext from './src/context/AuthContext';
 import ItemScreen from './src/screens/ItemScreen';
 import MyShopScreen from './src/screens/MyShopScreen';
 import { ItemContext } from './src/context/ItemContext';
 import { useContext } from 'react';
 import { Ionicons } from '@expo/vector-icons';
+import { useNavigation, CommonActions } from '@react-navigation/native';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -54,6 +56,7 @@ function Tabnav() {
 }
 
 function StackVsTabNav() {
+  const navigation = useNavigation();
   const ItemCtx = useContext(ItemContext)
 
   return <Stack.Navigator
@@ -72,7 +75,7 @@ function StackVsTabNav() {
         //<AntDesign onPress={() => ItemCtx.setSearchbar(!ItemCtx.searchbar)} name="search1" size={24} color="black" />
 
         <View style={styles.hr}>
-          <Ionicons style={styles.profile} name="person" size={24} color="black" />
+          <Ionicons onPress={() => { navigation.dispatch(CommonActions.navigate('LoginFlow')); }} style={styles.profile} name="person" size={24} color="black" />
           <Ionicons onPress={() => ItemCtx.setSearchbar(!ItemCtx.searchbar)} name="search" size={24} color="black" />
         </View>
       )
@@ -81,15 +84,19 @@ function StackVsTabNav() {
       headerTitle: () => <Text style={styles.title}>MatieMarket</Text>,
     }} name="TabNav" component={Tabnav} />
     <Stack.Screen options={{ title: "" }} name="ItemNav" component={ItemScreen} />
+    <Stack.Screen options={{ title: "" }} name="LoginFlow" component={LoginScreen} />
+
   </Stack.Navigator>
 }
 
 export default function App() {
-  return <ItemContextProvider>
-    <NavigationContainer>
-      <StackVsTabNav />
-    </NavigationContainer>
-  </ItemContextProvider>
+  return <AuthContext>
+    <ItemContextProvider>
+      <NavigationContainer>
+        <StackVsTabNav />
+      </NavigationContainer>
+    </ItemContextProvider>
+  </AuthContext>
 }
 
 const styles = StyleSheet.create({

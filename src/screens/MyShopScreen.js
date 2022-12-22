@@ -6,19 +6,17 @@ import MyItemComp from '../components/MyItemComp';
 import { ItemContext } from '../context/ItemContext';
 import * as ImagePicker from 'expo-image-picker';
 import * as ImageManipulator from 'expo-image-manipulator';
+
 const MyShopScreen = ({ navigation }) => {
     items = [
         {
             title: "Item 1",
             price: 100,
             desc: 'This is a very random item that you can buy if you really want to bla bla bla random filled random random lorem ipsum'
-        },
-        {
-            title: "Item 2",
-            price: 120,
-            desc: 'This is a very random item that you can buy if you really want to bla bla bla random filled random random lorem ipsum'
-        },
+        }
     ]
+
+
 
     const [title, setTitle] = useState("")
     const [price, setPrice] = useState(150)
@@ -29,6 +27,7 @@ const MyShopScreen = ({ navigation }) => {
     const [subCat, setSubCat] = useState('Misc');
     const [subCats, setSubCats] = useState(['Dorm', 'Tech', 'Misc']);
     let ItemCtx = useContext(ItemContext)
+
 
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -86,11 +85,9 @@ const MyShopScreen = ({ navigation }) => {
 
         <View style={styles.btn}><Text style={styles.btntext} onPress={() => ItemCtx.addItem({ title, price, description, imgurls, category, subCat })}>Add item!</Text></View>
         <View style={styles.frame}>
-            <Text style={styles.head}>My Items</Text>
+
         </View>
-        <FlatList data={items} renderItem={({ item }) => {
-            return <MyItemComp item={item} navigation={navigation} />
-        }} ></FlatList>
+
 
 
     </>

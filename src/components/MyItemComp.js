@@ -1,7 +1,11 @@
 
 import React, { useContext } from 'react'
 import { StyleSheet, Text, View, Button, Image, TouchableOpacity } from 'react-native';
+import { ItemContext } from '../context/ItemContext';
+
 const MyItemComp = (props) => {
+
+    ItemCtx = useContext(ItemContext)
     return <>
         <View style={styles.block}>
             <View style={styles.btnrow}>
@@ -10,13 +14,12 @@ const MyItemComp = (props) => {
                     <Text style={styles.price}>R {props.item.price}</Text>
                 </View>
                 <View style={styles.btns}>
-                    <Text>Edit</Text>
-                    <Text>Delete</Text>
+                    <Text style={styles.delete} onPress={() => ItemCtx.deleteItem(props.item.item_id)}>Delete</Text>
                 </View>
             </View>
             <View style={styles.row}>
-                <Text style={styles.desc}> {props.item.desc} </Text>
-                <Image style={styles.img} source={{ uri: 'https://stickerly.pstatic.net/sticker_pack/kd7ZooCY2IKkjvCjsszw/T01DIS/7/6fac0144-9bd1-40f5-b968-885621484b39.png' }} />
+                <Text style={styles.desc}> {props.item.description} </Text>
+                <Image style={styles.img} source={{ uri: props.item.img_url[0] }} />
             </View>
         </View>
     </>
@@ -25,8 +28,17 @@ const styles = StyleSheet.create({
     btns: {
         alignItems: 'center'
     },
+    delete: {
+        margin: 10,
+        backgroundColor: 'red',
+        padding: 7,
+        borderRadius: 5,
+        overflow: 'hidden',
+        borderStyle: 'solid',
+        color: 'white'
 
-
+    }
+    ,
     desc: {
         fontSize: 16,
         color: "rgb(150,150,150)",
@@ -50,9 +62,10 @@ const styles = StyleSheet.create({
         borderRadius: 5,
 
     }, img: {
-        width: 70,
-        height: 70,
-        borderRadius: 5
+        width: 100,
+        height: 100,
+        borderRadius: 5,
+        margin: 10
 
     },
     btnrow: {
@@ -62,7 +75,7 @@ const styles = StyleSheet.create({
     },
     row: {
         flexDirection: 'row',
-        width: 250,
+        width: 320,
         justifyContent: 'space-between'
     }
 })

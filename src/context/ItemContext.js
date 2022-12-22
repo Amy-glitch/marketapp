@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { supabase } from "../lib/supabase";
+import { AuthContext } from '../context/AuthContext';
 export const ItemContext = React.createContext(null);
 export default ({ children }) => {
 
     const [items, setItems] = useState([])
+    const [myitems, setMyItems] = useState([])
     const [itemsFashion, setItemsFashion] = useState([])
     const [itemsAcademic, setItemsAcademic] = useState([])
     const [itemsOther, setItemsOther] = useState([])
 
     const [searchbar, setSearchbar] = useState(false)
+
+    const AuthCtx = useContext(AuthContext)
 
 
 
@@ -63,6 +67,26 @@ export default ({ children }) => {
 
     }
 
+    async function deleteItem(id) {
+
+        const { error } = await supabase
+            .from('items')
+            .delete()
+            .eq('item_id', id)
+
+    }
+
+
+    async function getMyItems() {
+        const { data, error } = await supabase
+            .from('items')
+            .select()
+            .eq('uid', AuthCtx.session.user.id)
+        setMyItems(data)
+
+
+    }
+
 
 
 
@@ -73,7 +97,6 @@ export default ({ children }) => {
             .select()
             .like('title', '%' + term + '%')
         setItems(data)
-        console.log(data)
 
     }
 
@@ -85,7 +108,8 @@ export default ({ children }) => {
             description: props.description,
             img_url: props.imgurls,
             category: props.category,
-            sub_category: props.subCat
+            sub_category: props.subCat,
+            uid: AuthCtx.session.user.id
         }
         let { error } = await supabase.from('items').upsert(updates)
     }
@@ -105,5 +129,5 @@ export default ({ children }) => {
         return data.publicUrl
     }
 
-    return <ItemContext.Provider value={{ searchbar, setSearchbar, items, itemsFashion, itemsAcademic, itemsOther, addItem, uploadImg, searchItem, searchAcademic, searchFashion, searchOther }}>{children}</ItemContext.Provider>
+    return <ItemContext.Provider value={{ deleteItem, getMyItems, myitems, searchbar, setSearchbar, items, itemsFashion, itemsAcademic, itemsOther, addItem, uploadImg, searchItem, searchAcademic, searchFashion, searchOther }}>{children}</ItemContext.Provider>
 }

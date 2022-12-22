@@ -10,7 +10,10 @@ const AllScreen = ({ navigation }) => {
     const ItemCtx = useContext(ItemContext)
     items = ItemCtx.items;
     useEffect(() => {
-        ItemCtx.searchItem('')
+        ItemCtx.searchItem('');
+
+
+
     }, []);
 
 

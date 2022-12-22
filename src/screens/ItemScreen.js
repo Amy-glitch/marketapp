@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View, FlatList, Image, Dimensions } from 'react-native';
 
+
 const ItemScreen = ({ route }) => {
     let item = route.params
     let photos = item.img_url
