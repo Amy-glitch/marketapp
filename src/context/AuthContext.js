@@ -36,14 +36,20 @@ export default ({ children }) => {
 
     }
 
-    async function signUpWithEmail(email, password) {
+    async function signUpWithEmail(email, password, username) {
         setLoading(true)
         const { error } = await supabase.auth.signUp({
             email: email,
             password: password,
+            username: "hey",
+            options: {
+                data: { username: username }
+            }
+
         })
 
         if (error) console.log(error.message)
+
         setLoading(false)
     }
 

@@ -3,24 +3,29 @@ import { StyleSheet, Text, TextInput, View, TouchableOpacity, FlatList } from 'r
 import { AuthContext } from '../context/AuthContext';
 import { ItemContext } from '../context/ItemContext';
 import MyItemComp from '../components/MyItemComp';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import UserDetailScreen from './UserDetailScreen';
+import MyItemScreen from './MyItemScreen';
+import HelpScreen from './HelpScreen';
 
 const ProfileScreen = () => {
-    let AuthCtx = useContext(AuthContext)
-    let ItemCtx = useContext(ItemContext)
 
-    useEffect(() => {
-        ItemCtx.getMyItems()
 
-    }, []);
 
-    return (<View>
-        <Text>hey {AuthCtx.session.user.email}</Text>
-        <Text onPress={() => { AuthCtx.signOut() }}>signout</Text>
-        <Text style={styles.head}>My Items</Text>
-        <FlatList data={ItemCtx.myitems} renderItem={({ item }) => {
-            return <MyItemComp item={item} />
-        }} ></FlatList>
-    </View>)
+    const Tab = createBottomTabNavigator();
+
+    const Msgs = () => <Text>messages</Text>
+
+    return (<Tab.Navigator screenOptions={{
+        headerShown: false,
+
+    }}
+    >
+        <Tab.Screen name="MyItems" component={MyItemScreen} />
+        <Tab.Screen name="Profile" component={UserDetailScreen} />
+        <Tab.Screen name="Messages" component={Msgs} />
+        <Tab.Screen name="Help" component={HelpScreen} />
+    </Tab.Navigator>)
 }
 const styles = StyleSheet.create({
     head: { fontSize: 25 },

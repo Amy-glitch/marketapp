@@ -12,6 +12,7 @@ const ItemComp = (props) => {
                     <Image style={styles.img} source={{ uri: props.item.img_url[0] }} />
                 </View>
                 <Text style={styles.price}>R {props.item.price}</Text>
+                <Text> {props.item.username}</Text>
                 <Text style={styles.desc}> {props.item.description} </Text>
             </View>
         </TouchableOpacity>

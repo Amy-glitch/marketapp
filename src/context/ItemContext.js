@@ -93,10 +93,12 @@ export default ({ children }) => {
     async function searchItem(term) {
 
         const { data, error } = await supabase
-            .from('items')
-            .select()
+            .from('item_join_profile')
+            .select('*')
             .like('title', '%' + term + '%')
+        console.log(data)
         setItems(data)
+
 
     }
 

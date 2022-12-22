@@ -13,6 +13,7 @@ const ItemScreen = ({ route }) => {
             }} ></FlatList>
         </View>
         <Text style={styles.price}>{item.price}</Text>
+
         <Text style={styles.desc}>{item.description}</Text>
     </>
 }

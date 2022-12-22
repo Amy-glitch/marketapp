@@ -38,6 +38,7 @@ const LoginScreen = () => {
     const SignUp = () => {
         const [email, setEmail] = useState('karenvergeest@gmail.com');
         const [pwd, setPwd] = useState('Abcdef123!')
+        const [username, setUsername] = useState('Karen')
         return (<View style={styles.frame}>
             <Text style={styles.head}>Sign Up</Text>
             <View style={styles.row}>
@@ -45,11 +46,15 @@ const LoginScreen = () => {
                 <TextInput style={styles.input} value={email} onChangeText={(str) => setEmail(str)} />
             </View>
             <View style={styles.row}>
+                <Text style={styles.label}>Username</Text>
+                <TextInput style={styles.input} value={username} onChangeText={(str) => setUsername(str)} />
+            </View>
+            <View style={styles.row}>
                 <Text style={styles.label}>Password</Text>
                 <TextInput style={styles.input} value={pwd} onChangeText={(str) => setPwd(str)} />
             </View>
             <View style={styles.cent}>
-                <TouchableOpacity onPress={() => AuthCtx.signUpWithEmail(email, pwd)} style={styles.btn}>
+                <TouchableOpacity onPress={() => AuthCtx.signUpWithEmail(email, pwd, username)} style={styles.btn}>
                     <Text >Sign Up</Text>
                 </TouchableOpacity>
 
