@@ -9,27 +9,14 @@ export default ({ children }) => {
     const [chats, setChats] = useState([])
     const [msgs, setMsgs] = useState([])
     const [newMsgs, setNewMsgs] = useState([])
-
-
-
-
-    useEffect(() => {
-    }, [])
-
-
-    let inter = []
+    const [id, setId] = useState(1)
+    const list = supabase.channel('public:messages:chat_id=eq.' + id)
+        .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages', filter: 'chat_id=eq.' + id + '' }, (payload) => Test(payload))
+        .subscribe();
 
     function Test(payload) {
-        // let new_arr = [...msgs]
-
         setNewMsgs([{ ...payload.new }, ...newMsgs])
-        //setNewMsgs([...newMsgs, ...msgs])
         console.log(newMsgs)
-        //setMsgs([payload.new])
-        // console.log('msgs' + msgs)
-        // console.log('pay:' + payload.new)
-        //setMsgs(inter)
-        // console.log('msgs' + msgs)
     }
 
 
@@ -57,9 +44,8 @@ export default ({ children }) => {
 
         const { data, error } = await supabase.from('messages').select().eq('chat_id', id).order('time', { ascending: false })
         setMsgs(data)
-        const list = supabase.channel('public:messages:chat_id=eq.' + id)
-            .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages', filter: 'chat_id=eq.' + id + '' }, (payload) => Test(payload))
-            .subscribe();
+        setId(id)
+
 
     }
 

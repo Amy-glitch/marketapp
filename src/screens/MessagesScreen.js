@@ -18,14 +18,6 @@ const MessagesScreen = ({ route, navigation }) => {
         MsgCtx.setNewMsgs([])
         let name = route.params.user;
         navigation.setOptions({ title: name })
-
-
-        // supabase.channel('*').on('postgres_changes', { event: '*', schema: '*' }, payload => {
-        //         console.log('Change received!', payload)
-        //     })
-        //     .subscribe()
-
-
     }, [])
     const YourMsg = (props) => {
         return <View style={styles.yourmsgframe}><View style={styles.yourmsg}><Text>{props.msg}</Text></View></View>
