@@ -4,12 +4,13 @@ import { AuthContext } from '../context/AuthContext';
 import ProfileScreen from './ProfileScreen';
 
 const LoginScreen = () => {
+
+
     const [screen2, setScreen2] = useState(false)
     let AuthCtx = useContext(AuthContext)
-    useEffect(() => {
-        AuthCtx.getSession();
 
-    }, []);
+
+
     const SignIn = () => {
         const [email, setEmail] = useState('karenvergeest@gmail.com');
         const [pwd, setPwd] = useState('Abcdef123!')

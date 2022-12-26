@@ -6,7 +6,8 @@ import { ItemContext } from '../context/ItemContext';
 const UserDetailScreen = () => {
 
     let AuthCtx = useContext(AuthContext)
-    let user = AuthCtx.session.user;
+    //let user = AuthCtx.session.user;
+
 
 
     return (<View>
@@ -17,8 +18,8 @@ const UserDetailScreen = () => {
             <Text >Delete account</Text>
         </TouchableOpacity>
         <Text>User details</Text>
-        <Text>E-mail: {user.email}</Text>
-        <Text>Username: </Text>
+        <Text>E-mail: </Text>
+        <Text>Username:{AuthCtx.profile.username} </Text>
 
     </View>)
 }

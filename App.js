@@ -10,11 +10,13 @@ import AllScreen from './src/screens/AllScreen';
 import ItemContextProvider from './src/context/ItemContext'
 import AuthContext from './src/context/AuthContext';
 import ItemScreen from './src/screens/ItemScreen';
+import MsgContextProvider from './src/context/MsgContext';
 import MyShopScreen from './src/screens/MyShopScreen';
 import { ItemContext } from './src/context/ItemContext';
 import { useContext } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation, CommonActions } from '@react-navigation/native';
+import MessagesScreen from './src/screens/MessagesScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -85,16 +87,18 @@ function StackVsTabNav() {
     }} name="TabNav" component={Tabnav} />
     <Stack.Screen options={{ title: "" }} name="ItemNav" component={ItemScreen} />
     <Stack.Screen options={{ title: "" }} name="LoginFlow" component={LoginScreen} />
-
+    <Stack.Screen options={{ title: "" }} name="MsgsScreen" component={MessagesScreen} />
   </Stack.Navigator>
 }
 
 export default function App() {
   return <AuthContext>
     <ItemContextProvider>
-      <NavigationContainer>
-        <StackVsTabNav />
-      </NavigationContainer>
+      <MsgContextProvider>
+        <NavigationContainer>
+          <StackVsTabNav />
+        </NavigationContainer>
+      </MsgContextProvider>
     </ItemContextProvider>
   </AuthContext>
 }

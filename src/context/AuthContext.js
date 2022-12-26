@@ -6,16 +6,18 @@ export default ({ children }) => {
 
     const [loading, setLoading] = useState(false)
     const [session, setSession] = useState(null)
+    const [profile, setProfile] = useState(null)
 
     async function signOut() {
         const { data } = await supabase.auth.signOut()
-        getSession()
+        setSession(null)
     }
 
 
     async function signInWithEmail(email, password) {
-        const { data } = await supabase.auth.getSession()
-        console.log(data)
+        //  const { data } = await supabase.auth.getSession()
+        // console.log(data)
+
         setLoading(true)
         const { error } = await supabase.auth.signInWithPassword({
             email: email,
@@ -24,17 +26,31 @@ export default ({ children }) => {
 
 
         getSession()
-        if (error) console.log(error.message)
         setLoading(false)
     }
 
     async function getSession() {
 
         const res = await supabase.auth.getSession()
-        setSession(res.data.session)
-        // console.log(session)
+
+        if (res.data.session.user.id) {
+            getProfile(res.data.session.user.id)
+            setSession(res.data.session)
+        }
+
 
     }
+
+    async function getProfile(id) {
+        const { data, error } = await supabase
+            .from('profiles')
+            .select()
+            .eq('id', id)
+        setProfile(data[0])
+
+
+    }
+
 
     async function signUpWithEmail(email, password, username) {
         setLoading(true)
@@ -54,5 +70,5 @@ export default ({ children }) => {
     }
 
 
-    return <AuthContext.Provider value={{ loading, signInWithEmail, signOut, signUpWithEmail, getSession, session }}>{children}</AuthContext.Provider>
+    return <AuthContext.Provider value={{ getProfile, profile, loading, signInWithEmail, signOut, signUpWithEmail, getSession, session }}>{children}</AuthContext.Provider>
 }

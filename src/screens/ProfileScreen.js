@@ -7,14 +7,17 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import UserDetailScreen from './UserDetailScreen';
 import MyItemScreen from './MyItemScreen';
 import HelpScreen from './HelpScreen';
+import MessageScreen from './MessageScreen';
 
 const ProfileScreen = () => {
 
 
 
+
+
     const Tab = createBottomTabNavigator();
 
-    const Msgs = () => <Text>messages</Text>
+
 
     return (<Tab.Navigator screenOptions={{
         headerShown: false,
@@ -23,7 +26,7 @@ const ProfileScreen = () => {
     >
         <Tab.Screen name="MyItems" component={MyItemScreen} />
         <Tab.Screen name="Profile" component={UserDetailScreen} />
-        <Tab.Screen name="Messages" component={Msgs} />
+        <Tab.Screen name="Messages" component={MessageScreen} />
         <Tab.Screen name="Help" component={HelpScreen} />
     </Tab.Navigator>)
 }
