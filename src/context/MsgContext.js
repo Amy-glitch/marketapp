@@ -29,6 +29,7 @@ export default ({ children }) => {
 
     }
 
+
     async function sendMsg(props) {
         const updates = {
             from: props.from,
@@ -37,6 +38,7 @@ export default ({ children }) => {
             chat_id: props.chat_id
         }
         let { error } = await supabase.from('messages').insert(updates)
+        console.log(error)
 
     }
 
@@ -45,6 +47,15 @@ export default ({ children }) => {
         const { data, error } = await supabase.from('messages').select().eq('chat_id', id).order('time', { ascending: false })
         setMsgs(data)
         setId(id)
+    }
+
+    async function getMsgsWithUid(uid) {
+        const { data, error } = await supabase
+            .from('chats_with_profiles')
+            .select().filter("user1", "in", '(' + AuthCtx.session.user.id + ',' + uid + ')').filter("user2", "in", '(' + AuthCtx.session.user.id + ',' + uid + ')')
+        getMsgs(data[0].id)
+        console.log(data)
+        console.log(error)
 
 
     }
@@ -55,6 +66,5 @@ export default ({ children }) => {
 
 
 
-
-    return <MsgContext.Provider value={{ setNewMsgs, newMsgs, sendMsg, getChats, chats, getMsgs, msgs }}>{children}</MsgContext.Provider>
+    return <MsgContext.Provider value={{ id, getMsgsWithUid, setNewMsgs, newMsgs, sendMsg, getChats, chats, getMsgs, msgs }}>{children}</MsgContext.Provider>
 }

@@ -1,8 +1,8 @@
 import React from 'react'
-import { StyleSheet, Text, View, FlatList, Image, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Image, Dimensions, TouchableOpacity } from 'react-native';
 
 
-const ItemScreen = ({ route }) => {
+const ItemScreen = ({ route, navigation }) => {
     let item = route.params
     let photos = item.img_url
     return <>
@@ -15,6 +15,10 @@ const ItemScreen = ({ route }) => {
         <Text style={styles.price}>{item.price}</Text>
 
         <Text style={styles.desc}>{item.description}</Text>
+
+        <TouchableOpacity onPress={() => navigation.navigate('MsgsScreen', { uid: item.uid })}>
+            <Text>Message seller</Text>
+        </TouchableOpacity>
     </>
 }
 const styles = StyleSheet.create({

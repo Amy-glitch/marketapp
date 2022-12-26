@@ -14,10 +14,12 @@ const MessagesScreen = ({ route, navigation }) => {
     const [msg, setMsg] = useState('')
 
     useEffect(() => {
-        MsgCtx.getMsgs(route.params.id)
+        if (route.params.id) { MsgCtx.getMsgs(route.params.id) } else {
+            MsgCtx.getMsgsWithUid(route.params.uid)
+        }
         MsgCtx.setNewMsgs([])
-        let name = route.params.user;
-        navigation.setOptions({ title: name })
+        // let name = route.params.user;
+        // navigation.setOptions({ title: name })
     }, [])
     const YourMsg = (props) => {
         return <View style={styles.yourmsgframe}><View style={styles.yourmsg}><Text>{props.msg}</Text></View></View>
@@ -28,7 +30,7 @@ const MessagesScreen = ({ route, navigation }) => {
                 <Text>{props.msg}</Text>
             </View></View >)
     }
-    return <KeyboardAvoidingView keyboardVerticalOffset={headerHeight} style={{ flex: 1, justifyContent: 'flex-end' }} behavior="padding">
+    return <KeyboardAvoidingView keyboardVerticalOffset={headerHeight} style={{ flex: 1, justifyContent: 'flex-end' }} behavior={(Platform.OS === 'ios') ? "padding" : null}>
         <FlatList inverted={true} keyExtractor={() => Math.random()} data={[...MsgCtx.newMsgs, ...MsgCtx.msgs]} renderItem={(chat) => {
             if (chat.item.from == AuthCtx.session.user.id) {
                 return <YourMsg msg={chat.item.message} />
@@ -43,7 +45,7 @@ const MessagesScreen = ({ route, navigation }) => {
                 <View style={styles.inp}>
                     <TextInput style={styles.childtext} value={msg} onChangeText={(t) => setMsg(t)}></TextInput>
                 </View>
-                <TouchableOpacity onPress={() => MsgCtx.sendMsg({ to: route.params.other_id, from: AuthCtx.session.user.id, message: msg, chat_id: route.params.id })} style={styles.plusbtn}><Text>+</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => MsgCtx.sendMsg({ to: route.params.other_id ? route.params.other_id : route.params.uid, from: AuthCtx.session.user.id, message: msg, chat_id: route.params.id ? route.params.id : MsgCtx.id })} style={styles.plusbtn}><Text>+</Text></TouchableOpacity>
             </View>
         </View>
 
