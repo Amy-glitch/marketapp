@@ -1,10 +1,8 @@
-
 import React, { useContext, useEffect } from 'react'
-import { StyleSheet, Text, View, Button, FlatList } from 'react-native';
-import ItemComp from '../components/ItemComp';
-import PillsComp from '../components/PillsComp';
-import { ItemContext } from '../context/ItemContext';
-import SearchComp from '../components/SearchComp';
+import { StyleSheet, FlatList } from 'react-native';
+import ItemComp from '../../components/ItemComp';
+import { ItemContext } from '../../context/ItemContext';
+import SearchComp from '../../components/SearchComp';
 
 const AcademicsScreen = ({ navigation }) => {
     const ItemCtx = useContext(ItemContext)

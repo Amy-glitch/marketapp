@@ -13,10 +13,8 @@ const ItemScreen = ({ route, navigation }) => {
             }} ></FlatList>
         </View>
         <Text style={styles.price}>{item.price}</Text>
-
         <Text style={styles.desc}>{item.description}</Text>
-
-        <TouchableOpacity onPress={() => navigation.navigate('MsgsScreen', { uid: item.uid })}>
+        <TouchableOpacity onPress={() => navigation.navigate('MsgsScreen', { uid: item.uid, user: item.username })}>
             <Text>Message seller</Text>
         </TouchableOpacity>
     </>

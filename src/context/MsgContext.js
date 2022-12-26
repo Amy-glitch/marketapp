@@ -43,19 +43,30 @@ export default ({ children }) => {
     }
 
     async function getMsgs(id) {
-
+        setMsgs([])
         const { data, error } = await supabase.from('messages').select().eq('chat_id', id).order('time', { ascending: false })
         setMsgs(data)
         setId(id)
     }
 
     async function getMsgsWithUid(uid) {
+        setMsgs([])
         const { data, error } = await supabase
             .from('chats_with_profiles')
             .select().filter("user1", "in", '(' + AuthCtx.session.user.id + ',' + uid + ')').filter("user2", "in", '(' + AuthCtx.session.user.id + ',' + uid + ')')
-        getMsgs(data[0].id)
-        console.log(data)
-        console.log(error)
+
+        if (data[0]) {
+            getMsgs(data[0].id)
+        } else {
+            let updates = {
+                user1: uid,
+                user2: AuthCtx.session.user.id
+            }
+            const { data, error } = await supabase.from('chats').insert(updates)
+            console.log(error)
+
+        }
+
 
 
     }

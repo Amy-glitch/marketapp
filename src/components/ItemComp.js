@@ -13,7 +13,6 @@ const ItemComp = (props) => {
                 </View>
                 <Text style={styles.price}>R {props.item.price}</Text>
                 <Text> {props.item.username}</Text>
-                <Text style={styles.desc}> {props.item.description} </Text>
             </View>
         </TouchableOpacity>
     </>
@@ -42,12 +41,13 @@ const styles = StyleSheet.create({
 
     block: {
         backgroundColor: "rgb(230,230,230)",
-        margin: 20,
-        borderRadius: 5
+        margin: 4,
+        borderRadius: 5,
+        flex: 0.5
 
     }, img: {
-        width: 300,
-        height: 250,
+        width: 170,
+        height: 150,
         borderRadius: 5
 
     }
