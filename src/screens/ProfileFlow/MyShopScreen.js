@@ -4,6 +4,7 @@ import MyItemComp from '../../components/MyItemComp';
 import { ItemContext } from '../../context/ItemContext';
 import * as ImagePicker from 'expo-image-picker';
 import * as ImageManipulator from 'expo-image-manipulator';
+import globalStyles from '../../GlobalStyles';
 
 const MyShopScreen = () => {
     const [title, setTitle] = useState("")
@@ -48,10 +49,11 @@ const MyShopScreen = () => {
                 <Text style={styles.head2}>Price:</Text>
                 <TextInput style={styles.input} value={price} onChangeText={(e) => setPrice(e)} />
             </View>
-            <View style={styles.row}>
-                <Text style={styles.head2}>Description:</Text>
-                <TextInput style={styles.input} value={description} onChangeText={(e) => setDesc(e)} />
-            </View>
+
+            <Text style={styles.head2}>Description:</Text>
+            <TextInput multiline={true}
+                numberOfLines={2} style={styles.descinput} value={description} onChangeText={(e) => setDesc(e)} />
+
             <Text style={styles.head2}>Category:</Text>
             <View style={styles.row}>
                 <Text style={(category == "Academic") ? styles.selectedCat : styles.normal} onPress={() => { setCategory("Academic"); setSubCats(["Textbooks", "Tutors", "Notes", "Misc"]) }}>Academics</Text>
@@ -75,7 +77,7 @@ const MyShopScreen = () => {
 
 const styles = StyleSheet.create({
     btntext: {
-        backgroundColor: 'lightgray',
+        backgroundColor: globalStyles.addItemButtons,
         padding: 5,
         borderRadius: 6,
         borderStyle: 'solid',
@@ -93,10 +95,17 @@ const styles = StyleSheet.create({
 
     },
     frame: { marginLeft: 20 },
+    descinput: {
+        marginLeft: 5,
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderRadius: 5,
+        padding: 5
+    },
     input: { borderBottomWidth: 1, width: 200 },
     normal: { padding: 5 },
     selectedCat: {
-        backgroundColor: 'lightgrey',
+        backgroundColor: globalStyles.addItemButtons,
         borderStyle: 'solid',
         borderRadius: 5,
         overflow: 'hidden',
@@ -111,7 +120,12 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         width: 120,
         textAlign: 'center',
-        borderRadius: 5
+        borderRadius: 5,
+        borderColor: globalStyles.addItemPhotos,
+        backgroundColor: globalStyles.addItemPhotos,
+        overflow: 'hidden',
+        margin: 8
+
     },
     head: {
         fontSize: 25

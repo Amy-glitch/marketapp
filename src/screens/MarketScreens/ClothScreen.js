@@ -13,7 +13,7 @@ const ClothScreen = ({ navigation }) => {
     }, []);
     return <>
         <SearchComp pills={['All', 'Top', 'Bottom', 'Accesories', 'Misc']} func={(term, sub) => ItemCtx.searchFashion(term, sub)} />
-        <FlatList data={items} renderItem={({ item }) => <ItemComp item={item} navigation={navigation} />} ></FlatList>
+        <FlatList numColumns={2} keyExtracor={(item) => item} data={items} renderItem={({ item }) => <ItemComp item={item} navigation={navigation} />} ></FlatList>
     </>
 }
 const styles = StyleSheet.create({

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
-
+import globalStyles from '../GlobalStyles';
 const SignUp = (props) => {
     const [email, setEmail] = useState('karenvergeest@gmail.com');
     const [pwd, setPwd] = useState('Abcdef123!')
@@ -36,10 +36,10 @@ const styles = StyleSheet.create({
     btn: {
         marginTop: 20,
         padding: 5,
-        backgroundColor: 'lightgrey',
         borderRadius: 5,
         overflow: 'hidden',
-        borderStyle: 'solid'
+        borderStyle: 'solid',
+        backgroundColor: globalStyles.signUpBtn
     },
     label: {
         margin: 7,

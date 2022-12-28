@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { AuthContext } from '../../context/AuthContext';
+import globalStyles from '../../GlobalStyles';
 const UserDetailScreen = () => {
     let AuthCtx = useContext(AuthContext)
     return (<View>
@@ -20,7 +21,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         margin: 10,
         padding: 10,
-        backgroundColor: 'lightgrey',
+        backgroundColor: globalStyles.profileButton,
         borderRadius: 8,
         overflow: 'hidden',
         borderStyle: 'solid'

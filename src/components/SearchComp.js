@@ -7,7 +7,7 @@ const SearchComp = (props) => {
     const [str, setStr] = useState("")
     const ItemCtx = useContext(ItemContext)
     return <>
-        {ItemCtx.searchbar ? <TextInput onSubmitEditing={() => props.func(str)} onChangeText={(s) => setStr(s)} value={str} style={styles.searchbar} /> : <></>}
+        {ItemCtx.searchbar ? <TextInput onSubmitEditing={() => props.func(str)} onChangeText={(s) => setStr(s)} value={str} style={{ borderColor: 'grey', ...styles.searchbar }} /> : <></>}
         <PillsComp func={(pill) => {
             if (pill != 'All') { props.func(str, pill) } else { props.func(str, '') }
         }} pills={props.pills} />
@@ -15,7 +15,6 @@ const SearchComp = (props) => {
 }
 const styles = StyleSheet.create({
     searchbar: {
-        borderColor: 'grey',
         borderBottomWidth: 1,
         margin: 8,
         borderRadius: 5,

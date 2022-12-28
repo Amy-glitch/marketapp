@@ -96,7 +96,6 @@ export default ({ children }) => {
             .from('item_join_profile')
             .select('*')
             .like('title', '%' + term + '%')
-        console.log(data)
         setItems(data)
 
 

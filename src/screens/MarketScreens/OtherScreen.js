@@ -12,7 +12,7 @@ const OtherScreen = ({ navigation }) => {
     }, []);
     return <>
         <SearchComp func={(term, sub) => ItemCtx.searchOther(term, sub)} pills={['All', 'Dorm', 'Tech', 'Misc']} />
-        <FlatList data={items} renderItem={({ item }) => <ItemComp item={item} navigation={navigation} />} ></FlatList>
+        <FlatList numColumns={2} keyExtracor={(item) => item} data={items} renderItem={({ item }) => <ItemComp item={item} navigation={navigation} />} ></FlatList>
     </>
 }
 const styles = StyleSheet.create({

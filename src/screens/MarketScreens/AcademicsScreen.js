@@ -12,7 +12,7 @@ const AcademicsScreen = ({ navigation }) => {
     }, []);
     return <>
         <SearchComp pills={['All', 'Textbooks', 'Tutors', 'Notes', 'Misc']} func={(term, sub) => ItemCtx.searchAcademic(term, sub)} />
-        <FlatList data={items} renderItem={({ item }) => {
+        <FlatList numColumns={2} keyExtracor={(item) => item} data={items} renderItem={({ item }) => {
             return <ItemComp item={item} navigation={navigation} />
         }} ></FlatList>
     </>

@@ -2,6 +2,7 @@
 import React, { useContext } from 'react'
 import { StyleSheet, Text, View, Button, Image, TouchableOpacity } from 'react-native';
 import { ItemContext } from '../context/ItemContext';
+import globalStyles from '../GlobalStyles';
 
 const MyItemComp = (props) => {
 
@@ -57,7 +58,8 @@ const styles = StyleSheet.create({
 
 
     block: {
-        backgroundColor: "rgb(230,230,230)",
+        borderWidth: 2,
+        borderColor: globalStyles.myItemColor,
         margin: 20,
         borderRadius: 5,
 

@@ -1,7 +1,7 @@
 
 import React from 'react'
 import { StyleSheet, Text, View, Button, Image, TouchableOpacity } from 'react-native';
-
+import globalStyles from '../GlobalStyles';
 
 const ItemComp = (props) => {
     return <>
@@ -12,7 +12,6 @@ const ItemComp = (props) => {
                     <Image style={styles.img} source={{ uri: props.item.img_url[0] }} />
                 </View>
                 <Text style={styles.price}>R {props.item.price}</Text>
-                <Text> {props.item.username}</Text>
             </View>
         </TouchableOpacity>
     </>
@@ -29,20 +28,22 @@ const styles = StyleSheet.create({
 
     },
     head: {
-        fontSize: 25,
-        margin: 5
-
+        fontSize: 16,
+        margin: 5,
+        color: globalStyles.itemLabelColor
     },
     price: {
-        fontSize: 20,
-        margin: 5
+        fontSize: 14,
+        margin: 0,
+        color: globalStyles.itemLabelColor
     },
 
 
     block: {
-        backgroundColor: "rgb(230,230,230)",
+        //  borderBottomWidth: 1,
+        borderBottomColor: globalStyles.itemLabelColor,
         margin: 4,
-        borderRadius: 5,
+        //borderRadius: 5,
         flex: 0.5
 
     }, img: {

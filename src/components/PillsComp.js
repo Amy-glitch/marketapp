@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import globalStyles from '../GlobalStyles.js'
 
 const PillsComp = (props) => {
     const Pills = () => {
         return props.pills.map((pill) => {
-            return <TouchableOpacity onPress={() => props.func(pill)} key={pill} ><View style={styles.tag}><Text>{pill}</Text></View></TouchableOpacity>
+            return <TouchableOpacity onPress={() => props.func(pill)} key={pill} ><View style={styles.pill
+            }><Text>{pill}</Text></View></TouchableOpacity>
         }
         )
     }
@@ -24,8 +26,8 @@ const styles = StyleSheet.create({
     row: {
         flexDirection: 'row'
     },
-    tag: {
-        backgroundColor: 'rgb(210,210,210)',
+    pill: {
+        backgroundColor: globalStyles.pillColor,
         margin: 5,
         paddingTop: 5,
         paddingBottom: 5,
